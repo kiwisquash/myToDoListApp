@@ -84,7 +84,12 @@ class TodoApp extends React.Component {
 			(todo) => {if (todo.id !==id) return todo;}
 		);
 
-		axios.delete(this.apiUrl+'/'+id)
+		fetch(this.apiUrl + '/'+id, {
+			method: 'DELETE',
+			headers: {
+				'Content-type':'application/json'
+			}
+		})
 			.then((res)=> {
 				this.setState({
 					data: remainder

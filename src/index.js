@@ -52,18 +52,27 @@ class TodoApp extends React.Component {
 	}
 
 	componentDidMount() {
-		axios.get(this.apiUrl)
-		.then((res)=>{
-			this.setState({data: res.data})
-		});
+		fetch(this.apiUrl)
+			.then(resp => resp.json())
+			.then(data => {
+				this.setState({data: data})
+			})
+			.catch((err)=>console.log(err));
 	}
 
 	addTodo(val) {
 		const todo = {text: val}
-		
-		axios.post(this.apiUrl, todo)
-			.then((res) => {
-				this.state.data.push(res.data);
+
+		fetch(this.apiUrl, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+				'Content-type':'application/json'
+			},
+			body: JSON.stringify(todo)})
+			.then((res)=>res.json())
+			.then((data) => {
+				this.state.data.push(data);
 				this.setState({data: this.state.data});
 			});
 		

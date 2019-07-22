@@ -10,11 +10,14 @@ const TodoForm = ({addTodo}) => {
 
 	return (
 		<div>
-			<input ref={node => {input = node}} />
-			<button onClick={() => {
+		<form onSubmit={(e)=>{
+				e.preventDefault();
 				addTodo(input.value);
-				input.value = '';
-			}}>Add</button>
+				input.value='';
+			}}>
+			<input ref={node => {input = node}} />
+			<input type="submit" value="Add"/>
+		</form>
 		</div>
 	)		
 }

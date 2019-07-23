@@ -12,10 +12,11 @@ const TodoForm = ({addTodo}) => {
 		<div>
 		<form onSubmit={(e)=>{
 				e.preventDefault();
+				input = document.getElementById("item-to-add");
 				addTodo(input.value);
 				input.value='';
 			}}>
-			<input ref={node => {input = node}} />
+			<input id = "item-to-add" />
 			<input type="submit" value="Add"/>
 		</form>
 		</div>
